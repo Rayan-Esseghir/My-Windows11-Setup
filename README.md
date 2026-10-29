@@ -1,11 +1,14 @@
-# My Win11 Setup 💻
+# My Windows 11 Setup :
 
 A complete guide to my Windows 11 customization. From the YASB bar to all the little tweaks that make it clean and productive.
 
-![Desktop Preview 1](Preview1.jpg)
-![Desktop Preview 2](Preview2.jpg)
-![Desktop Preview 3](Preview3.jpg)
-![Desktop Preview 4](Preview4.jpg)
+<div align="center">
+  <img src="Preview1.jpg" width="49%" alt="Preview 1"/>
+  <img src="Preview2.jpg" width="49%" alt="Preview 2"/>
+  <br>
+  <img src="Preview3.jpg" width="49%" alt="Preview 3"/>
+  <img src="Preview4.jpg" width="49%" alt="Preview 4"/>
+</div>
 
 ## 📄 Table of Contents
 
