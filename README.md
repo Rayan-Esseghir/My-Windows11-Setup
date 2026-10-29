@@ -2,10 +2,10 @@
 
 A complete guide to my Windows 11 customization. From the YASB bar to all the little tweaks that make it clean and productive.
 
-![Desktop Preview](preview1.png)
-![Desktop Preview](preview2.png)
-![Desktop Preview](preview3.png)
-![Desktop Preview](preview4.png)
+![Desktop Preview](Preview1.png)
+![Desktop Preview](Preview2.png)
+![Desktop Preview](Preview3.png)
+![Desktop Preview](Preview4.png)
 
 ## 📄 Table of Contents
 
