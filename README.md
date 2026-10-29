@@ -61,6 +61,16 @@ Komorebi lets you easily organize windows and adjust their layout on the fly by 
 * Copy the `komorebi.json` file from here to your `C:\Users\YOUR_NAME\` directory.
 * Restart **Komorebi** for the changes to take effect.
 
+### 🚀 Startup Automation
+To start the window manager and status bar automatically when you log in, use the included `start-wm.ps1` script with Windows Task Scheduler:
+
+1. Open **Task Scheduler** and click **Create Basic Task**.
+2. Name it "Window Manager" and set the Trigger to **When I log on**.
+3. Set the Action to **Start a program**.
+4. In the **Program/script** box, type: `powershell`
+5. In the **Add arguments** box, paste the following (replacing the path with your actual folder location): 
+   `-WindowStyle Hidden -ExecutionPolicy Bypass -File "C:\Users\PC\Documents\My-Win11-Setup\start-wm.ps1"`
+   
 ---
 
 ## 📺 Credits & Helpful Resources
