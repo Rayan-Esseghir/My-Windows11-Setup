@@ -88,7 +88,7 @@ A complete guide to my Windows 11 customization: a tiling window manager, a cust
 
 Yazi's optional helpers (`7zip`, `ffmpeg`, `jq`, `fd`, `ripgrep`, `fzf`, `zoxide`, `ImageMagick`) are installed too, so previews and search work properly.
 
-**Optional extras** I also use: [TranslucentTB](https://github.com/TranslucentTB/TranslucentTB), [Windhawk](https://windhawk.net/), and [Win11 Toggle Rounded Corners](https://github.com/rich-ayr/win11-toggle-rounded-corners).
+**Optional extras** I also use: [TranslucentTB](https://github.com/TranslucentTB/TranslucentTB) and [Win11 Toggle Rounded Corners](https://github.com/rich-ayr/win11-toggle-rounded-corners).
 
 ---
 
@@ -100,12 +100,12 @@ Yazi's optional helpers (`7zip`, `ffmpeg`, `jq`, `fd`, `ripgrep`, `fzf`, `zoxide
 Run in a **normal** (non-admin) PowerShell window:
 
 ```powershell
-git clone https://github.com/YOUR_USERNAME/My-Win11-Setup.git
-cd My-Win11-Setup
+git clone https://github.com/Rayan-Esseghir/My-Windows11-Setup.git
+cd My-Windows11-Setup
 powershell -ExecutionPolicy Bypass -File .\install.ps1
 ```
 
-Add `-Extras` to also install TranslucentTB and Windhawk:
+Add `-Extras` to also install TranslucentTB:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\install.ps1 -Extras
@@ -404,12 +404,7 @@ Small system tweaks that go with this setup:
 | Tool | What it does |
 | :--- | :--- |
 | [TranslucentTB](https://github.com/TranslucentTB/TranslucentTB) | Makes the taskbar transparent |
-| [Windhawk](https://windhawk.net/) | Installs small mods that change how Windows looks and behaves |
 | [Win11 Toggle Rounded Corners](https://github.com/rich-ayr/win11-toggle-rounded-corners) | Turns the rounded window corners on or off |
-
-<!-- TODO: add the Windhawk mods you use and how you use each tool, for example:
-**Windhawk mods:** mod name, what it does
--->
 
 ---
 
@@ -424,7 +419,7 @@ Small system tweaks that go with this setup:
 5. In the **Add arguments** box, paste the following (replacing the path with your actual folder location):
 
    ```
-   -WindowStyle Hidden -ExecutionPolicy Bypass -File "C:\Users\YOUR_NAME\Documents\My-Win11-Setup\start-wm.ps1"
+   -WindowStyle Hidden -ExecutionPolicy Bypass -File "C:\Users\YOUR_NAME\Documents\My-Windows11-Setup\start-wm.ps1"
    ```
 
 To start Masir at login too, add this line to `start-wm.ps1`, before the YASB block:
@@ -459,7 +454,7 @@ Everything uses **Catppuccin Mocha**: Komorebi borders, YASB, Windows Terminal, 
 ## 📁 Repo structure
 
 ```
-My-Win11-Setup/
+My-Windows11-Setup/
 ├── README.md
 ├── install.ps1                 # Installs apps + copies configs
 ├── backup.ps1                  # Copies your live configs into this repo

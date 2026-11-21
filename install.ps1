@@ -8,7 +8,7 @@
     powershell -ExecutionPolicy Bypass -File .\install.ps1 -SkipApps
 #>
 param(
-    [switch]$Extras,        # also install TranslucentTB and Windhawk
+    [switch]$Extras,        # also install TranslucentTB
     [switch]$SkipApps,      # only copy the configs
     [switch]$SkipConfigs    # only install the apps
 )
@@ -93,8 +93,7 @@ if (-not $SkipApps) {
     )
     if ($Extras) {
         $wingetApps += @(
-            "CharlesMilette.TranslucentTB",
-            "RamenSoftware.Windhawk"
+            "CharlesMilette.TranslucentTB"
         )
     }
     foreach ($id in $wingetApps) {
