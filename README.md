@@ -67,6 +67,7 @@ A complete guide to my Windows 11 customization: a tiling window manager, a cust
 | 🏷️ Name | ✨ Source | 📦 Installed with |
 | :--- | :--- | :--- |
 | Status Bar | [YASB](https://github.com/amnweb/yasb) | Scoop (`extras`) |
+| Taskbar Hider | [THide](https://github.com/amnweb/thide) | MSI (GitHub release) |
 | Window Manager | [Komorebi](https://github.com/LGUG2Z/komorebi) | Scoop (`extras`) |
 | Hotkey Daemon | [whkd](https://github.com/LGUG2Z/whkd) | Scoop (`extras`) |
 | Focus Follows Mouse | [Masir](https://github.com/LGUG2Z/masir) | winget |
@@ -109,6 +110,12 @@ Add `-Extras` to also install TranslucentTB:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\install.ps1 -Extras
+```
+
+Add `-HideTaskbar` to also install [THide](#-hide-the-windows-taskbar-thide) (it hides the Windows taskbar so only the YASB bar is left). It asks for admin permission once, because it uses an MSI installer:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\install.ps1 -HideTaskbar
 ```
 
 The script:
@@ -242,6 +249,31 @@ Start the bar with `yasbc start`, or reload it with `yasbc reload` (it also watc
 | Komorebi workspaces, active layout, active window | Clock | Cava, weather, RAM, wallpapers, battery, power menu |
 
 Press `Alt + W` to open the wallpaper gallery.
+
+### 🫥 Hide the Windows taskbar (THide)
+
+[THide](https://github.com/amnweb/thide) is a tiny tool that hides the Windows taskbar, so only the YASB bar is visible.
+
+1. Go to the [THide releases page](https://github.com/amnweb/thide/releases/latest).
+2. Download the file ending in `x64.msi` and double-click it. It adds `thide` to your `PATH`.
+3. Open a **new** PowerShell window and run:
+
+```powershell
+thide start              # hide the taskbar
+thide enable-autostart   # start THide with Windows
+```
+
+Other commands:
+
+| Command | What it does |
+| :--- | :--- |
+| `thide show` | Show the taskbar |
+| `thide hide` | Hide the taskbar |
+| `thide toggle` | Switch between shown and hidden |
+| `thide stop` | Quit THide and bring the taskbar back |
+| `thide disable-autostart` | Stop it starting with Windows |
+
+You can also right-click its tray icon. If your taskbar ever stays hidden by mistake, run `thide stop`.
 
 ### 8️⃣ Windows Terminal
 

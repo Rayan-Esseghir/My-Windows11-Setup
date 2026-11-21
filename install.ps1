@@ -9,6 +9,7 @@
 #>
 param(
     [switch]$Extras,        # also install TranslucentTB
+    [switch]$HideTaskbar,   # also install THide and start it with Windows (asks for admin)
     [switch]$SkipApps,      # only copy the configs
     [switch]$SkipConfigs    # only install the apps
 )
@@ -102,6 +103,30 @@ if (-not $SkipApps) {
             --accept-package-agreements --accept-source-agreements
     }
     Update-SessionPath
+
+    if ($HideTaskbar) {
+        Write-Step "THide (hides the Windows taskbar)"
+        try {
+            $rel   = Invoke-RestMethod -Uri "https://api.github.com/repos/amnweb/thide/releases/latest" -Headers @{ "User-Agent" = "install.ps1" }
+            $asset = $rel.assets | Where-Object { $_.name -like "*x64.msi" } | Select-Object -First 1
+            if ($asset) {
+                $msi = Join-Path $env:TEMP $asset.name
+                Invoke-WebRequest -Uri $asset.browser_download_url -OutFile $msi
+                Start-Process msiexec.exe -ArgumentList "/i `"$msi`" /passive" -Verb RunAs -Wait
+                Update-SessionPath
+                if (Get-Command thide -ErrorAction SilentlyContinue) {
+                    Start-Process thide -ArgumentList "start" -WindowStyle Hidden
+                    thide enable-autostart
+                } else {
+                    Write-Warning "THide installed, but not found yet. Open a new window and run: thide start ; thide enable-autostart"
+                }
+            } else {
+                Write-Warning "No x64 installer found. Download THide from https://github.com/amnweb/thide/releases"
+            }
+        } catch {
+            Write-Warning "Could not install THide: $_  (download it from https://github.com/amnweb/thide/releases)"
+        }
+    }
 
     Write-Step "Nerd Font (JetBrainsMono)"
     if (Get-Command oh-my-posh -ErrorAction SilentlyContinue) {
