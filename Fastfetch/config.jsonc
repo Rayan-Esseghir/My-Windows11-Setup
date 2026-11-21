@@ -41,7 +41,8 @@
     {
       "type": "cpu",
       "key": "│ ├󰻠 ",
-      "keyColor": "green"
+      "keyColor": "green",
+      "format": "{name} @ {freq-max}"
     },
     {
       "type": "gpu",
@@ -121,7 +122,8 @@
     {
       "type": "wm",
       "key": "│ ├󱂬 ",
-      "keyColor": "blue"
+      "keyColor": "blue",
+      "format": "{?plugin-name}{plugin-name} (DWM){?}{/plugin-name}{pretty-name}{/}"
     },
     {
       "type": "wmtheme",

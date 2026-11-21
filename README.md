@@ -20,6 +20,7 @@ A complete guide to my Windows 11 customization: a tiling window manager, a cust
 - [Repo structure](#-repo-structure)
 - [Updating this repo](#-updating-this-repo)
 - [Troubleshooting](#-troubleshooting)
+- [License](#-license)
 - [Credits](#-credits--helpful-resources)
 
 ---
@@ -208,7 +209,12 @@ Copy-Item .\Komorebi\whkdrc "$env:USERPROFILE\.config\whkdrc"
 
 # Download Komorebi's per-app rules (applications.json)
 komorebic fetch-asc
+
+# Tell Komorebi where its config lives, so it loads on its own after every reboot
+setx KOMOREBI_CONFIG_HOME "$env:USERPROFILE"
 ```
+
+Close and reopen PowerShell after `setx`.
 
 `komorebi.json` points to `C:/Users/PC/applications.json`. **Change `PC` to your own username** (the quick installer does this for you).
 
@@ -219,7 +225,13 @@ komorebic start --whkd
 masir
 ```
 
-Stop with `komorebic stop --whkd`.
+Stop with `komorebic stop --whkd`. To apply changes to `komorebi.json` without restarting:
+
+```powershell
+komorebic replace-configuration "$env:USERPROFILE\komorebi.json"
+```
+
+**Floating layer:** `komorebi.json` has `"floating_layer_behaviour": "Float"`, so new windows open floating whenever the current workspace is on the floating layer. Press `Alt + Shift + ;` to switch a workspace between tiling and floating.
 
 ### 7️⃣ YASB (status bar)
 
@@ -285,11 +297,20 @@ Copy-Item "$dest\settings.json" "$dest\settings.json.bak"
 Copy-Item .\Terminal\settings.json "$dest\settings.json"
 ```
 
-Highlights: Catppuccin Mocha color scheme, acrylic background at 65% opacity, JetBrainsMono Nerd Font Mono, Windows PowerShell as the default profile.
+Highlights: Catppuccin Mocha color scheme, acrylic background at 65% opacity, JetBrainsMono Nerd Font Mono at 10pt, Windows PowerShell as the default profile. New windows open at 160 columns × 42 rows, so they look right both full screen and in a Komorebi split.
 
 ### 9️⃣ PowerShell profile, Oh My Posh and Fastfetch
 
-The profile sets UTF-8, shows Fastfetch when the terminal opens, and loads the Oh My Posh prompt.
+The profile sets UTF-8, loads the Oh My Posh prompt, and runs Fastfetch when the terminal opens (after a short 150 ms pause, so Komorebi can finish tiling the window first).
+
+The `fastfetch` command in the profile is **width-aware**, so it still looks good in a narrow split window:
+
+| Terminal width | What you get |
+| :--- | :--- |
+| 152 columns or more | Full layout, logo on the left |
+| 98 to 151 columns | Logo on top, info below |
+| Less than 98 columns | No logo, info only |
+| You pass arguments (e.g. `fastfetch --help`) | Runs the normal Fastfetch with your arguments |
 
 ```powershell
 $docs = [Environment]::GetFolderPath('MyDocuments')
@@ -383,6 +404,7 @@ All shortcuts live in [`Komorebi/whkdrc`](Komorebi/whkdrc).
 | `Alt + X` / `Alt + Y` | Flip layout horizontally / vertically |
 | `Alt + Q` | Retile |
 | `Alt + P` | Pause tiling |
+| `Alt + Shift + ;` | Toggle the workspace between tiling and floating layer |
 | `Alt + I` | Toggle shortcuts |
 | `Alt + O` | Reload whkd |
 | `Alt + Shift + O` | Reload Komorebi config |
@@ -547,8 +569,8 @@ git push
 | :--- | :--- |
 | Icons show as squares | Install the Nerd Font, then select it in Windows Terminal and keep `JetBrainsMono NFP` in YASB's `styles.css` |
 | No status bar | Run `yasbc start`. Check that Komorebi is running (`komorebic state`) |
-| Windows don't tile | Run `komorebic start --whkd`. Make sure `komorebi.json` is in your user folder |
-| Shortcuts don't work | Press `Alt + O` to reload whkd, or check that `~\.config\whkdrc` exists |
+| Windows don't tile | Run `komorebic start --whkd`. Make sure `komorebi.json` is in your user folder and `KOMOREBI_CONFIG_HOME` is set to it |
+| Shortcuts don't work | Press `Alt + O` to reload whkd, or check that `~\.config\whkdrc` exists. Key names like `oem_1` and `oem_period` depend on your keyboard layout, so adjust them in `whkdrc` if one key does nothing |
 | Weather widget is empty | Add your own API key in YASB `config.yaml` |
 | Wallpaper gallery is empty | Set `image_path` to a folder that exists |
 | Focus doesn't follow the mouse | Masir isn't running. Start it with `masir` |
@@ -569,3 +591,9 @@ A huge thanks to the following creators and repositories that inspired this setu
 * **[Windows Ricing Guide (by darrenlingters3512)](https://www.youtube.com/watch?v=9RJre4byy2g&t=2236s)** - This complete installation tutorial was incredibly helpful for learning how to install and configure tools like Komorebi, Masir, and YASB from scratch.
 * **[amnweb / yasb-themes](https://github.com/amnweb/yasb-themes)** - My YASB bar started from the "Simple Widgets" theme by **elrondforwin**.
 * **[Catppuccin](https://github.com/catppuccin/catppuccin)** - The color palette used everywhere.
+
+---
+
+## 📜 License
+
+My own configs and scripts are released under the [MIT License](LICENSE). Third-party items (Catppuccin themes, the YASB "Simple Widgets" theme, the Flow Launcher themes, and the tools themselves) keep their own licenses.

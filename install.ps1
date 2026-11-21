@@ -148,6 +148,9 @@ if (-not $SkipConfigs) {
     # Komorebi + whkd
     Copy-Config "$Repo\Komorebi\komorebi.json" "$UserHome\komorebi.json"
     Copy-Config "$Repo\Komorebi\whkdrc"        "$UserHome\.config\whkdrc"
+    [Environment]::SetEnvironmentVariable("KOMOREBI_CONFIG_HOME", $UserHome, "User")
+    $env:KOMOREBI_CONFIG_HOME = $UserHome
+    Write-Host "  set KOMOREBI_CONFIG_HOME = $UserHome" -ForegroundColor Green
 
     # Windows Terminal
     $wtDir = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState"

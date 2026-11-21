@@ -44,6 +44,9 @@ alt + shift + f         : komorebic toggle-monocle
 alt + q    	            : komorebic retile
 alt + p                 : komorebic toggle-pause
 
+# Toggle between tiling and floating workspace layers
+alt + shift + oem_1 : komorebic toggle-workspace-layer
+
 # Layouts
 alt + x                 : komorebic flip-layout horizontal
 alt + y                 : komorebic flip-layout vertical
