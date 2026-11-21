@@ -525,6 +525,8 @@ My-Windows11-Setup/
 
 ## 🔄 Updating this repo
 
+> This section is for the repo owner (me), or for anyone who forks this repo to keep their own version. If you just want to use my setup, you can skip it.
+
 After changing something on your PC, run:
 
 ```powershell
