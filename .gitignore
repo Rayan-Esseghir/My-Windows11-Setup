@@ -1,0 +1,19 @@
+# Backups made by install.ps1 / by hand
+*.bak
+*.bak-*
+*.old
+
+# Dumps and temporary files
+setup-dump.txt
+repo-tree.txt
+*.log
+*.tmp
+
+# Secrets (never commit these)
+.env
+*.key
+secrets.*
+
+# OS files
+Thumbs.db
+desktop.ini

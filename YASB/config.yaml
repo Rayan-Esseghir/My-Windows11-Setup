@@ -45,7 +45,7 @@ bars:
       right: [
         "cava",
         "weather",
-        "memory",
+        "memory", # RAM style: "memory" = icon + % (new) | "memory_ring" = your old ring
         "wallpapers",
         "battery",
         "power_menu"
@@ -68,6 +68,17 @@ widgets:
       label: "{%a, %d %b %H:%M}"
       label_alt: "{%A, %d %B %Y %H:%M}"
       timezones: []
+      calendar:
+        blur: true
+        round_corners: true
+        round_corners_type: "normal"
+        border_color: "system"
+        alignment: "center"
+        direction: "down"
+        extended: false
+        show_years: true
+        show_holidays: false
+        show_week_numbers: true
       callbacks:
         on_left: "toggle_calendar"
   # Only ONE power_menu is defined now (the duplicate was silently overriding the first).
@@ -80,7 +91,7 @@ widgets:
       uptime: True
       blur: False
       blur_background: True
-      animation_duration: 200
+      animation_duration: 250
       button_row: 5
       buttons:
         shutdown: ["\uf011", "Shut Down"]
@@ -92,14 +103,24 @@ widgets:
   wallpapers:
     type: "yasb.wallpapers.WallpapersWidget"
     options:
-      label: "<span>\udb83\ude09</span>"
-      image_path: "THIS-IS-AN-EXAMPLE-C:\\Users\\PC\\Pictures\\Wallpapers"
+      label: "<span>\udb80\udd1b</span>" #\udb83\ude09
+      image_path: "C:\\Users\\PC\\Pictures\\Wallpapers"
+
+       # add your wallpaper path here. example: "C:\\Users\\User\\Pictures\\Wallpapers"
       change_automatically: false # Automatically change wallpaper
       update_interval: 60 # If change_automatically is true, update interval in seconds
+      keybindings:
+      - keys: "alt+w"
+        action: "toggle_gallery"
+      engine:
+        enabled: true
+        animation: "diamond" # circle/slide_top/diamond/split
       gallery:
-        image_width: 220
-        orientation: "portrait"
-        image_corner_radius: 20
+        image_width: 520
+        image_corner_radius: 0
+        type: "strip" # default/magnified/strip/slide - see "Gallery types" below
+        orientation: "landscape" # landscape/portrait
+        accent_color: "auto"
   cava:
     type: "yasb.cava.CavaWidget"
     options:
@@ -115,7 +136,25 @@ widgets:
       bar_spacing: 2
       bar_width: 4
       hide_empty: true
+  # RAM style 1 (active): icon + percentage, turns peach/red when usage is high.
+  # Left-click toggles between "icon %" and "icon used / total".
   memory:
+    type: "yasb.memory.MemoryWidget"
+    options:
+      label: "<span>\udb80\udf5b</span> {virtual_mem_percent}%" #uE9D9   \udb80\udf5b
+      label_alt: "<span>\udb80\udf5b</span> {virtual_mem_used} / {virtual_mem_total}"
+      update_interval: 5000
+      callbacks:
+        on_left: "toggle_label"
+        on_middle: "do_nothing"
+        on_right: "do_nothing"
+      memory_thresholds:
+        low: 35
+        medium: 60
+        high: 90
+  # RAM style 2: your original ring. To use it, replace "memory" with
+  # "memory_ring" in the bar's right: [ ... ] list (and nothing else).
+  memory_ring:
     type: "yasb.memory.MemoryWidget"
     options:
       label: "{virtual_mem_percent}%"
@@ -193,7 +232,7 @@ widgets:
       status_thresholds:
         critical: 10
         low: 25
-        medium: 75
+        medium: 50
         high: 95
         full: 100
       status_icons:
@@ -208,7 +247,7 @@ widgets:
     options:
       label: "<span>{icon}</span> {temp}"
       label_alt: "{location}: Min {min_temp}, Max {max_temp}, Humidity {humidity}"
-      api_key: "PUT-YOUR-API-HERE" # Get a free key from https://www.weatherapi.com/
+      api_key: "YOUR_API_KEY_HERE" # Get a free key from https://www.weatherapi.com/
       show_alerts: true
       tooltip: true
       update_interval: 600 # Update interval in seconds, Min 600 seconds
@@ -249,12 +288,12 @@ widgets:
         hourly_icon_size: 32 # better to set 16, 32 or 64 for better quality
         icon_smoothing: true # should be true for smoother icon or false for sharper icon if using 16, 32 or 64 for hourly_icon_size
         temp_line_width: 2 # can be 0 to hide the temperature line
-        current_line_color: "#8EAEE8"
+        current_line_color: "#89b4fa"
         current_line_width: 1 # can be 0 to hide the current hour line
         current_line_style: "dot"
         hourly_gradient:
           enabled: false
-          top_color: "#8EAEE8"
+          top_color: "#89b4fa"
           bottom_color: "#2A3E68"
         hourly_forecast_buttons: # Optional hourly forecast data type toggle buttons, default disabled
           enabled: true # Set to false to hide the buttons
